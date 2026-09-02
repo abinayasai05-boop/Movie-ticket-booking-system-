@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineBook - Movie Ticket Booking</title>
+<link rel="stylesheet" href="style.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+nav{
+    background:#111827;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#ef4444;
+}
+
+.search-box input{
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    width:250px;
+}
+
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:45px;
+}
+
+.hero p{
+    margin-top:10px;
+}
+
+.movies{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.movie-card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.movie-card:hover{
+    transform:translateY(-8px);
+}
+
+.movie-card h2{
+    margin-bottom:10px;
+}
+
+.movie-card button{
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#ef4444;
+    color:white;
+    cursor:pointer;
+}
+
+.booking{
+    display:none;
+    padding:30px;
+    text-align:center;
+}
+
+.seats{
+    display:grid;
+    grid-template-columns:repeat(5,60px);
+    gap:10px;
+    justify-content:center;
+    margin:20px 0;
+}
+
+.seat{
+    width:60px;
+    height:60px;
+    background:#475569;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.selected{
+    background:#22c55e;
+}
+
+.confirm-btn{
+    padding:12px 25px;
+    border:none;
+    background:#ef4444;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#summary{
+    margin-top:20px;
+    font-size:18px;
+}
+
+footer{
+    background:#111827;
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">🎬 CineBook</div>
+
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Search Movie">
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Book Your Favourite Movie</h1>
+    <p>Easy and Fast Movie Ticket Booking</p>
+</section>
+
+<section class="movies">
+
+<div class="movie-card">
+    <h2>LEO</h2>
+    <p>⭐ 8.5/10</p>
+    <p>Action • Thriller</p>
+    <button onclick="bookMovie('LEO')">Book Now</button>
+</div>
+
+<div class="movie-card">
+    <h2>GOAT</h2>
+    <p>⭐ 8.2/10</p>
+    <p>Action • Sci-Fi</p>
+    <button onclick="bookMovie('GOAT')">Book Now</button>
+</div>
+
+<div class="movie-card">
+    <h2>VIKRAM</h2>
+    <p>⭐ 8.8/10</p>
+    <p>Action • Crime</p>
+    <button onclick="bookMovie('VIKRAM')">Book Now</button>
+</div>
+
+</section>
+
+<section class="booking" id="bookingSection">
+
+<h2 id="movieTitle"></h2>
+
+<h3>Select Seats</h3>
+
+<div class="seats" id="seatContainer"></div>
+
+<button class="confirm-btn" onclick="confirmBooking()">
+Confirm Booking
+</button>
+
+<div id="summary"></div>
+
+</section>
+
+<footer>
+    © 2026 CineBook
+</footer>
+
+<script>
+
+const seatContainer = document.getElementById("seatContainer");
+
+for(let i=1;i<=25;i++){
+
+    const seat=document.createElement("div");
+
+    seat.classList.add("seat");
+
+    seat.innerText=i;
+
+    seat.addEventListener("click",function(){
+        seat.classList.toggle("selected");
+    });
+
+    seatContainer.appendChild(seat);
+}
+
+function bookMovie(movie){
+
+    document.getElementById("bookingSection").style.display="block";
+
+    document.getElementById("movieTitle").innerText =
+    "Booking For : " + movie;
+
+    document.getElementById("summary").innerHTML="";
+
+    window.scrollTo({
+        top:document.body.scrollHeight,
+        behavior:"smooth"
+    });
+}
+
+function confirmBooking(){
+
+    const selectedSeats =
+    document.querySelectorAll(".seat.selected");
+
+    const count = selectedSeats.length;
+
+    if(count===0){
+        alert("Please select at least one seat");
+        return;
+    }
+
+    const total = count * 200;
+
+    document.getElementById("summary").innerHTML =
+    `
+    <h3>✅ Booking Confirmed</h3>
+    <p>Tickets: ${count}</p>
+    <p>Total Amount: ₹${total}</p>
+    `;
+}
+
+document.getElementById("search")
+.addEventListener("keyup",function(){
+
+    let value=this.value.toLowerCase();
+
+    let cards=document.querySelectorAll(".movie-card");
+
+    cards.forEach(card=>{
+
+        let title=card.querySelector("h2")
+        .innerText.toLowerCase();
+
+        if(title.includes(value)){
+            card.style.display="block";
+        }else{
+            card.style.display="none";
+        }
+
+    });
+});
+
+</script>
+
+</body>
+</html>

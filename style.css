@@ -1,0 +1,165 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    <script src="script.js"></script>
+}
+
+nav{
+    background:#111827;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#ef4444;
+}
+
+.search-box input{
+    width:250px;
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    outline:none;
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#cbd5e1;
+}
+
+.movies{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+.movie-card{
+    background:#1e293b;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    transition:0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+.movie-card:hover{
+    transform:translateY(-10px);
+}
+
+.movie-card h2{
+    margin-bottom:10px;
+}
+
+.movie-card p{
+    margin:8px 0;
+    color:#d1d5db;
+}
+
+.movie-card button{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#ef4444;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.movie-card button:hover{
+    background:#dc2626;
+}
+
+.booking{
+    display:none;
+    margin:20px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
+}
+
+.booking h2,
+.booking h3{
+    text-align:center;
+}
+
+.seats{
+    display:grid;
+    grid-template-columns:repeat(5,60px);
+    gap:10px;
+    justify-content:center;
+    margin:25px 0;
+}
+
+.seat{
+    width:60px;
+    height:60px;
+    background:#475569;
+    border-radius:8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.seat:hover{
+    background:#64748b;
+}
+
+.selected{
+    background:#22c55e;
+}
+
+.confirm-btn{
+    display:block;
+    margin:auto;
+    padding:12px 25px;
+    border:none;
+    border-radius:8px;
+    background:#ef4444;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.confirm-btn:hover{
+    background:#dc2626;
+}
+
+#summary{
+    text-align:center;
+    margin-top:20px;
+    font-size:18px;
+}
+
+footer{
+    background:#111827;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
